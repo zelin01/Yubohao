@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field, field_validator
 from app.models import UserRole, TxnType
 
 class RegisterIn(BaseModel):
-    username: str = Field(min_length=1, max_length=32, pattern=r'^[a-zA-Z0-9_-]+$')
+    username: str = Field(min_length=1, max_length=32, pattern=r'^[a-zA-Z0-9_-]+$') # 用户名只允许字母、数字、下划线、连字符
     password: str = Field(min_length=1, max_length=64)
     nickname: str = Field(min_length=1, max_length=32)
     role: UserRole = UserRole.USER
@@ -31,8 +31,9 @@ class UserUpdateIn(BaseModel):
     nickname: str | None = Field(default=None, min_length=1, max_length=32)
     avatar: str | None = Field(default=None, max_length=255)
 
+# 用户充值请求
 class RechargeIn(BaseModel):
-    amount: float = Field(gt=0, le=100000)
+    amount: float = Field(gt=0, le=100) # 充值金额限制
 
     @field_validator("amount")
     @classmethod
