@@ -1,11 +1,11 @@
-from pydantic import BaseSettings, SettingsConfigDIct
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
-    DATABASE_URL: str
-    JWT_SECRET: str
-    JWT_EXPIRE_MINUTES: int
-    ALGORITHMS: str = 'HS256'
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    model_config = SettingsConfigDIct(env_file = ".env")
+    DATABASE_URI: str
+    JWT_SECRET: str
+    JWT_ALGORITHM: str = "HS256"
+    JWT_EXPIRATION_MINUTES: int = 60
 
 settings = Settings()

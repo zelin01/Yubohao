@@ -1,6 +1,6 @@
 # 异步数据库连接
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
-from sqlalchemy.orm import DeclarativeMeta, DeclarativeBase
+from sqlalchemy.orm import DeclarativeBase
 from app.config import settings
 
 # 创建异步引擎
