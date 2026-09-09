@@ -1,17 +1,16 @@
 from datetime import datetime, timedelta
-from jose import jwt
-from passlib.context import CryptContext
+import jwt
+import bcrypt
 from app.config import settings
 
-pwd_ctx = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # 生成密码哈希
 def hash_password(pwd: str) -> str:
-    return pwd_ctx.hash(pwd)
+    return bcrypt.hashpw(pwd.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
 # 登录校验
 def verify_password(pwd: str, hashed: str) -> bool:
-    return pwd_ctx.verify(pwd, hashed)
+    return bcrypt.checkpw(pwd.encode("utf-8"), hashed.encode("utf-8"))
 
 # 生成访问令牌
 def create_token(user_id: int) -> str:

@@ -1,7 +1,4 @@
-from asyncio import set_event_loop
-
 from fastapi import APIRouter, Depends, HTTPException, status
-from six import assertNotRegex
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
